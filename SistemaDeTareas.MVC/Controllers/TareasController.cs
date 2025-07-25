@@ -22,6 +22,7 @@ namespace SistemaTareas.MVC.Controllers
             }
                 
             ViewData["Estado"] = estado;
+            ViewData["OrdenarPor"] = ordenarPor;
             return View(tareas);
         }
 

@@ -1,29 +1,29 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace SistemaTareas.MVC.Controllers
+namespace SistemaDeTareas.MVC.Controllers
 {
-    public class BusquedaController : Controller
+    public class LoginController : Controller
     {
-        // GET: BusquedaController
+        // GET: LoginController
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: BusquedaController/Details/5
+        // GET: LoginController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: BusquedaController/Create
+        // GET: LoginController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: BusquedaController/Create
+        // POST: LoginController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -38,13 +38,13 @@ namespace SistemaTareas.MVC.Controllers
             }
         }
 
-        // GET: BusquedaController/Edit/5
+        // GET: LoginController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: BusquedaController/Edit/5
+        // POST: LoginController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -59,13 +59,13 @@ namespace SistemaTareas.MVC.Controllers
             }
         }
 
-        // GET: BusquedaController/Delete/5
+        // GET: LoginController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: BusquedaController/Delete/5
+        // POST: LoginController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

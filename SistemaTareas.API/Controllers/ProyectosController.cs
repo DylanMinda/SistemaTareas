@@ -1,8 +1,8 @@
 ﻿using Dapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using SistemaTareas.API.Models;
 using System.Data.Common;
-
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace SistemaTareas.API.Controllers
@@ -17,7 +17,7 @@ namespace SistemaTareas.API.Controllers
         {
             var connectionString = config.GetConnectionString("DefaultConnection");
 
-            connection = new MySqlConnector.MySqlConnection(connectionString);
+            connection = new SqlConnection(connectionString);
             connection.Open();
         }
 
@@ -36,7 +36,7 @@ namespace SistemaTareas.API.Controllers
         }
 
         [HttpPost]
-        public dynamic Post([FromBody] dynamic proyecto)
+        public dynamic Post([FromBody] Proyecto proyecto)
         {
             connection.Execute(
                "INSERT INTO proyectos (Id,Nombre, UsuarioId) " +

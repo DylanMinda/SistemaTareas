@@ -1,39 +1,40 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SistemaTareas.APIConsumer;
 using SistemaTareas.API.Models;
+using SistemaTareas.APIConsumer;
+using System.Numerics;
 
 namespace SistemaTareas.MVC.Controllers
 {
-    public class ProyectosController : Controller
+    public class TareasController : Controller
     {
-        // GET: ProyectosController
+        // GET: TareasController
         public ActionResult Index()
         {
-            CRUD<Proyecto>.GetAll();
-            var proyectos = CRUD<Proyecto>.GetAll();
-            return View(proyectos);
+            var tareas = CRUD<Tarea>.GetAll();
+            return View(tareas);
         }
 
-        // GET: ProyectosController/Details/5
+        // GET: TareasController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: ProyectosController/Create
+        // GET: TareasController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: ProyectosController/Create
+        // POST: TareasController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Tarea tarea)
         {
             try
             {
+                var nuevoPlan = CRUD<Tarea>.Create(tarea);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -42,13 +43,13 @@ namespace SistemaTareas.MVC.Controllers
             }
         }
 
-        // GET: ProyectosController/Edit/5
+        // GET: TareasController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: ProyectosController/Edit/5
+        // POST: TareasController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -63,13 +64,13 @@ namespace SistemaTareas.MVC.Controllers
             }
         }
 
-        // GET: ProyectosController/Delete/5
+        // GET: TareasController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: ProyectosController/Delete/5
+        // POST: TareasController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

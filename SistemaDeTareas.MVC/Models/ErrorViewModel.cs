@@ -1,4 +1,4 @@
-namespace SistemaTareas.MVC.Models
+namespace SistemaDeTareas.MVC.Models
 {
     public class ErrorViewModel
     {

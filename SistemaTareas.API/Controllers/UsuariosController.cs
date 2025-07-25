@@ -1,6 +1,6 @@
 ﻿using Dapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.SqlServer;
+using Microsoft.Data.SqlClient;
 using SistemaTareas.API.Models;
 using System.Data.Common;
 
@@ -18,7 +18,7 @@ namespace SistemaTareas.API.Controllers
         {
             var connectionString = config.GetConnectionString("DefaultConnection");
 
-            connection = new SqlServerServiceCollectionExtensions.SqlConnection(connectionString);
+             connection = new SqlConnection(connectionString);
             connection.Open();
         }
         // GET: api/<UsuariosController>
@@ -33,23 +33,23 @@ namespace SistemaTareas.API.Controllers
         [HttpGet("{id}")]
         public dynamic Get(int id)
         {
-            var usuario = connection.QuerySingle<Usuario>("SELECT * FROM usuarios WHERE Id = @Id", new { Id = id });
+            var usuario = connection.QuerySingle<Usuario>("SELECT * FROM usuarios WHERE id = @id", new { id = id });
             return usuario;
         }
 
         // POST api/<UsuariosController>
         [HttpPost]
-        public dynamic Post([FromBody] dynamic usuario)
+        public dynamic Post([FromBody] Usuario usuario)
         {
             connection.Execute(
-               "INSERT INTO usuarios (Id,Nombre, Email, Password) " +
-               "VALUES (@Id,@Nombre, @Email, @Password)",
+               "INSERT INTO usuarios (id,nombre, email, password) " +
+               "VALUES (@id,@nombre, @email, @password)",
                new
                {
-                   Id = usuario.Id,
-                   Nombre = usuario.Nombre,
-                   Email = usuario.Email,
-                   Password = usuario.Password
+                   id = usuario.Id,
+                   nombre = usuario.nombre,
+                   email = usuario.email,
+                   password = usuario.password
                });
             return usuario;
         }
@@ -59,7 +59,7 @@ namespace SistemaTareas.API.Controllers
         public dynamic Put(int id, [FromBody] Usuario usuario)
         {
             connection.Execute(
-                "UPDATE usuarios SET Nombre = @Nombre, Email = @Email, Password = @Password WHERE Id = @Id", usuario);
+                "UPDATE usuarios SET Nombre = @Nombre, Email = @Email, Password = @Password  WHERE id = @id", usuario);
             return usuario;
         }
 
@@ -68,7 +68,7 @@ namespace SistemaTareas.API.Controllers
         public void Delete(int id)
         {
             connection.Execute(
-                "DELETE FROM usuarios WHERE Id = @Id", new { Id = id });
+                "DELETE FROM usuarios  WHERE id = @id", new { id = id });
         }
     }
 }

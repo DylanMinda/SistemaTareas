@@ -1,8 +1,8 @@
 ﻿using Dapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using SistemaTareas.API.Models;
 using System.Data.Common;
-
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace SistemaTareas.API.Controllers
@@ -17,7 +17,7 @@ namespace SistemaTareas.API.Controllers
         {
             var connectionString = config.GetConnectionString("DefaultConnection");
 
-            connection = new MySqlConnector.MySqlConnection(connectionString);
+            connection = new SqlConnection(connectionString);
             connection.Open();
         }
 
@@ -31,22 +31,24 @@ namespace SistemaTareas.API.Controllers
         [HttpGet("{id}")]
         public dynamic Get(int id)
         {
-            var tarea = connection.QuerySingle<Tarea>("SELECT * FROM tareas WHERE Id = @Id", new { Id = id });
+            var tarea = connection.QuerySingle<Tarea>("SELECT * FROM tareas WHERE id = @id", new { Id = id });
             return tarea;
         }
 
         [HttpPost]
-        public dynamic Post([FromBody] dynamic tarea)
+        public dynamic Post([FromBody] Tarea tarea)
         {
             connection.Execute(
-               "INSERT INTO tareas (Id,Titulo, UsuarioId,ProyectoId) " +
-               "VALUES (@Id,@Titulo, @UsuarioId,@ProyectoId)",
+               "INSERT INTO tareas (id,Titulo, Estado, FechaVencimiento,UsuarioId,ProyectoId) " +
+               "VALUES (@id,@titulo, @estado, @fechaVencimiento,@usuarioId,@proyectoId)",
                new
                {
-                   Id = tarea.Id,
-                   Titulo = tarea.Titulo,
-                   UsuarioId = tarea.UsuarioId,
-                   ProyectoId= tarea.ProyectoId
+                   id = tarea.Id,
+                   titulo = tarea.Titulo,
+                   estado = tarea.Estado,
+                   fechaVencimiento = tarea.FechaVencimiento,
+                   usuarioId = tarea.UsuarioId,
+                   proyectoId= tarea.ProyectoId
                });
             return tarea;
         }
@@ -55,7 +57,7 @@ namespace SistemaTareas.API.Controllers
         public dynamic Put(int id, [FromBody] Tarea tarea)
         {
             connection.Execute(
-                "UPDATE tareas SET Titulo = @Titulo, UsuarioId = @UsuarioId, ProyectoId = @ProyectoId WHERE Id = @Id", tarea);
+                "UPDATE tareas SET Titulo = @Titulo, Estado=@Estado, FechaVencimiento=@FechaVencimiento,UsuarioId = @UsuarioId, ProyectoId = @ProyectoId WHERE id = @id", tarea);
             return tarea;
         }
 
@@ -63,7 +65,7 @@ namespace SistemaTareas.API.Controllers
         public void Delete(int id)
         {
             connection.Execute(
-                "DELETE FROM proyectos WHERE Id = @Id", new { Id = id });
+                "DELETE FROM proyectos WHERE id = @id", new { Id = id });
         }
     }
 }

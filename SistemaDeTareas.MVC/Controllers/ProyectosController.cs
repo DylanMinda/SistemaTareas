@@ -1,29 +1,35 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SistemaTareas.APIConsumer;
+using SistemaTareas.API.Models;
 
 namespace SistemaTareas.MVC.Controllers
 {
-    public class TareasController : Controller
+    public class ProyectosController : Controller
     {
-        // GET: TareasController
+        // GET: ProyectosController
         public ActionResult Index()
         {
-            return View();
+            CRUD<Proyecto>.GetAll();
+            var proyectos = CRUD<Proyecto>.GetAll();
+            return View(proyectos);
         }
 
-        // GET: TareasController/Details/5
+        // GET: ProyectosController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var proyectos = CRUD<Proyecto>.GetById(id);
+            return View(proyectos);
         }
 
-        // GET: TareasController/Create
+        // GET: ProyectosController/Create
         public ActionResult Create()
         {
+
             return View();
         }
 
-        // POST: TareasController/Create
+        // POST: ProyectosController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -38,13 +44,13 @@ namespace SistemaTareas.MVC.Controllers
             }
         }
 
-        // GET: TareasController/Edit/5
+        // GET: ProyectosController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: TareasController/Edit/5
+        // POST: ProyectosController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -59,13 +65,13 @@ namespace SistemaTareas.MVC.Controllers
             }
         }
 
-        // GET: TareasController/Delete/5
+        // GET: ProyectosController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: TareasController/Delete/5
+        // POST: ProyectosController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

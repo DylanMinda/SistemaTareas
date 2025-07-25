@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SistemaTareas.API.Models;
+using SistemaTareas.APIConsumer;
 
 namespace SistemaTareas.MVC.Controllers
 {
@@ -8,7 +10,8 @@ namespace SistemaTareas.MVC.Controllers
         // GET: UsuariosController
         public ActionResult Index()
         {
-            return View();
+            var nuevoUsuario = CRUD<Usuario>.GetAll();
+            return View(nuevoUsuario);
         }
 
         // GET: UsuariosController/Details/5
@@ -26,11 +29,12 @@ namespace SistemaTareas.MVC.Controllers
         // POST: UsuariosController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Usuario usuario)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var nuevoUsuario = CRUD<Usuario>.Create(usuario);
+                return RedirectToAction("Index", "Login");
             }
             catch
             {

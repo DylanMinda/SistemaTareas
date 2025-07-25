@@ -1,3 +1,11 @@
+
+using SistemaTareas.API.Models;
+using SistemaTareas.APIConsumer;
+
+CRUD<Tarea>.EndPoint = "https://localhost:7029/api/Tareas";
+CRUD<Usuario>.EndPoint = "https://localhost:7029/api/Usuarios";
+CRUD<Proyecto>.EndPoint = "https://localhost:7029/api/Proyectos";
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

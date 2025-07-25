@@ -1,0 +1,20 @@
+﻿    ﻿@{
+ViewData["Title"] = "Central";
+    }
+
+
+<body>
+    <div>
+       
+    </div>
+
+    <div>
+        <h1 class="text-center">Bienvenido a la Central de Tareas</h1>
+        <p class="text-center">Aquí puedes gestionar tus tareas de manera eficiente.</p>
+        <div class="text-center">
+            <a class="btn btn-primary" asp-controller="Tareas" asp-action="Index">Ver Tareas</a>
+            <a class="btn btn-secondary" asp-controller="Proyectos" asp-action="Index">Ver Proyectos</a>
+            <a class="btn btn-success" asp-controller="Usuarios" asp-action="Index">Ver Usuarios</a>
+        </div>
+    </div>
+</body>

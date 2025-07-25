@@ -32,10 +32,11 @@ namespace SistemaTareas.MVC.Controllers
         // POST: ProyectosController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Proyecto proyecto)
         {
             try
             {
+                var nuevoProyetco = CRUD<Proyecto>.Create(proyecto);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -53,10 +54,11 @@ namespace SistemaTareas.MVC.Controllers
         // POST: ProyectosController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Proyecto proyecto)
         {
             try
             {
+                var nuevoProyetco = CRUD<Proyecto>.Update(id,proyecto);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -74,10 +76,11 @@ namespace SistemaTareas.MVC.Controllers
         // POST: ProyectosController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Proyecto proyeco)
         {
             try
             {
+                var proyecto = CRUD<Proyecto>.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

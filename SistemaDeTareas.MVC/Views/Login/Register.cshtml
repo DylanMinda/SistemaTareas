@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model SistemaTareas.API.Models.Usuario
+
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -6,23 +8,36 @@
     <title>Registro</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Crear Cuenta</h1>
-        <form method="post">
-            <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" required placeholder="Ingrese su nombre">
-            </div>
-            <div class="form-group mt-2">
-                <label for="email">Correo electrónico</label>
-                <input type="email" class="form-control" id="email" name="email" required placeholder="Ingrese su correo electrónico">
-            </div>
-            <div class="form-group mt-2">
-                <label for="password">Contraseña</label>
-                <input type="password" class="form-control" id="password" name="contraseña" required placeholder="Ingrese su contraseña">
-            </div>
-            <button type="submit" class="btn btn-primary mt-3">Registrar</button>
-        </form>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" class="form-control" />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="nombre" class="control-label"></label>
+                    <input asp-for="nombre" class="form-control" />
+                    <span asp-validation-for="nombre" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="email" class="control-label"></label>
+                    <input asp-for="email" class="form-control" />
+                    <span asp-validation-for="email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="password" class="control-label"></label>
+                    <input asp-for="password" class="form-control" />
+                    <span asp-validation-for="password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
+
 </body>
 </html>

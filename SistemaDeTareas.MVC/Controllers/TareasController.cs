@@ -9,16 +9,27 @@ namespace SistemaTareas.MVC.Controllers
     public class TareasController : Controller
     {
         // GET: TareasController
-        public ActionResult Index()
+        public ActionResult Index(string? estado, string? ordenarPor)
         {
             var tareas = CRUD<Tarea>.GetAll();
+
+            if (!string.IsNullOrEmpty(estado))
+                tareas = tareas.Where(t => t.Estado == estado).ToList();
+
+            if (ordenarPor == "Estado")
+            {
+                tareas = tareas.OrderBy(t => t.Estado).ToList();
+            }
+                
+            ViewData["Estado"] = estado;
             return View(tareas);
         }
 
         // GET: TareasController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var tareas = CRUD<Tarea>.GetById(id);
+            return View(tareas);
         }
 
         // GET: TareasController/Create
@@ -34,7 +45,7 @@ namespace SistemaTareas.MVC.Controllers
         {
             try
             {
-                var nuevoPlan = CRUD<Tarea>.Create(tarea);
+                var nuevaTarea = CRUD<Tarea>.Create(tarea);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -52,10 +63,11 @@ namespace SistemaTareas.MVC.Controllers
         // POST: TareasController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Tarea tarea)
         {
             try
             {
+                var nuevaTarea = CRUD<Tarea>.Update(id, tarea);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -77,6 +89,7 @@ namespace SistemaTareas.MVC.Controllers
         {
             try
             {
+                var nuevaTarea = CRUD<Tarea>.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

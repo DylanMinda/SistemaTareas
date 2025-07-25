@@ -18,6 +18,11 @@ namespace SistemaDeTareas.MVC.Controllers
             return View();
         }
 
+        public ActionResult Central()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

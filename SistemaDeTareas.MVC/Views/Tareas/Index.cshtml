@@ -1,0 +1,53 @@
+﻿@model IEnumerable<SistemaTareas.API.Models.Tarea>
+@{
+    var estados = new[] { "pendiente", "en progreso", "completada" };
+}
+
+<h2>Reporte de Tareas</h2>
+<form method="get" class="row g-3 mb-3">
+    <div class="col-md-3">
+        <label for="estado" class="form-label">Estado</label>
+        <select id="estado" name="estado" class="form-select">
+            <option value="">Todos</option>
+            @foreach (var estado in estados)
+            {
+                <option value="@estado" selected="@(ViewData["Estado"]?.ToString() == estado ? "selected" : null)">@estado</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-3 align-self-end">
+        <button type="submit" class="btn btn-primary">Filtrar</button>
+    </div>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th>@Html.DisplayNameFor(model => model.Titulo)</th>
+            <th>@Html.DisplayNameFor(model => model.Estado)</th>
+            <th>@Html.DisplayNameFor(model => model.FechaVencimiento)</th>
+            <th>@Html.DisplayNameFor(model => model.Usuario)</th>
+            <th>@Html.DisplayNameFor(model => model.Proyecto)</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.Id)</td>
+        <td>@Html.DisplayFor(modelItem => item.Titulo)</td>
+        <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+        <td>@Html.DisplayFor(modelItem => item.FechaVencimiento)</td>
+        <td>@Html.DisplayFor(modelItem => item.UsuarioId)/</td>
+        <td>@Html.DisplayFor(modelItem => item.ProyectoId)</td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
+    </tr>
+}
+    </tbody>
+</table>

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SistemaTareas.API.Models.Proyecto>
+﻿@model IEnumerable<SistemaTareas.API.Models.Usuario>
 
 @{
     ViewData["Title"] = "Index";
@@ -9,14 +9,6 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<div class="row mb-3">
-    <div class="col-md-6">
-        <form asp-action="Index" method="get" class="d-flex gap-2">
-            <input type="text" name="usuarioId" class="form-control" placeholder="Buscar por Usuario ID..." value="@ViewData["UsuarioFilter"]" />
-            <button type="submit" class="btn btn-primary">Buscar</button>
-        </form>
-    </div>
-</div>
 <table class="table">
     <thead>
         <tr>
@@ -24,10 +16,10 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Nombre)
+                @Html.DisplayNameFor(model => model.nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UsuarioId)
+                @Html.DisplayNameFor(model => model.email)
             </th>
             <th></th>
         </tr>
@@ -39,13 +31,13 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
+                @Html.DisplayFor(modelItem => item.nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UsuarioId)
+                @Html.DisplayFor(modelItem => item.email)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id}) |
                     @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
